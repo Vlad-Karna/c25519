@@ -81,7 +81,7 @@ static const struct test_vector test_vectors[] = {
 static void test(const struct test_vector *t)
 {
 	const unsigned int len = strlen(t->text);
-	struct sha512_state s;
+	sha512_state s;
 	uint8_t hash[SHA512_HASH_SIZE];
 	unsigned int i;
 

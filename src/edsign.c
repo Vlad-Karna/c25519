@@ -20,7 +20,7 @@ static const uint8_t ed25519_order[FPRIME_SIZE] = {
 
 static void expand_key(uint8_t *expanded, const uint8_t *secret)
 {
-	struct sha512_state s;
+	sha512_state s;
 
 	sha512_init(&s);
 	sha512_final(&s, secret, EDSIGN_SECRET_KEY_SIZE);
@@ -67,7 +67,7 @@ static void hash_with_prefix(uint8_t *out_fp,
 			     uint8_t *init_block, unsigned int prefix_size,
 			     const uint8_t *message, size_t len)
 {
-	struct sha512_state s;
+	sha512_state s;
 
 	sha512_init(&s);
 

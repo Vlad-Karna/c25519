@@ -8,7 +8,7 @@
 
 #if !defined(C25519_USE_MBEDTLS_SHA512)
 
-const struct sha512_state sha512_initial_state = { {
+const sha512_state sha512_initial_state = { {
 	0x6a09e667f3bcc908LL, 0xbb67ae8584caa73bLL,
 	0x3c6ef372fe94f82bLL, 0xa54ff53a5f1d36f1LL,
 	0x510e527fade682d1LL, 0x9b05688c2b3e6c1fLL,
@@ -99,7 +99,7 @@ static inline uint64_t rot64(uint64_t x, int bits)
 	return (x >> bits) | (x << (64 - bits));
 }
 
-void sha512_block(struct sha512_state *s, const uint8_t *blk)
+void sha512_block(sha512_state *s, const uint8_t *blk)
 {
 	uint64_t w[16];
 	uint64_t a, b, c, d, e, f, g, h;
@@ -164,7 +164,7 @@ void sha512_block(struct sha512_state *s, const uint8_t *blk)
 	s->h[7] += h;
 }
 
-void sha512_final(struct sha512_state *s, const uint8_t *blk,
+void sha512_final(sha512_state *s, const uint8_t *blk,
 		  size_t total_size)
 {
 	uint8_t temp[SHA512_BLOCK_SIZE] = {0};
@@ -184,7 +184,7 @@ void sha512_final(struct sha512_state *s, const uint8_t *blk,
 	sha512_block(s, temp);
 }
 
-void sha512_get(const struct sha512_state *s, uint8_t *hash,
+void sha512_get(const sha512_state *s, uint8_t *hash,
 		unsigned int offset, unsigned int len)
 {
 	int i;
