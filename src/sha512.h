@@ -22,24 +22,24 @@
 static inline void sha512_init(sha512_state *s)
 {
 	mbedtls_sha512_init( s );
-	mbedtls_sha512_starts_ret( s, 0 );
+	mbedtls_sha512_starts( s, 0 );
 }
 
 static inline void sha512_block(sha512_state *s, const uint8_t *blk)
 {
-	mbedtls_sha512_update_ret( s, blk, SHA512_BLOCK_SIZE );
+	mbedtls_sha512_update( s, blk, SHA512_BLOCK_SIZE );
 }
 
 static inline void sha512_final(sha512_state *s, const uint8_t *blk, size_t total_size)
 {
-	mbedtls_sha512_update_ret( s, blk, total_size );
+	mbedtls_sha512_update( s, blk, total_size );
 }
 
 static inline void sha512_get(sha512_state *s, uint8_t *hash, unsigned int offset, unsigned int len)
 {
 	(void)offset;
 	(void)len;
-	mbedtls_sha512_finish_ret( s, hash );
+	mbedtls_sha512_finish( s, hash );
 	mbedtls_sha512_free( s );
 }
 #else
